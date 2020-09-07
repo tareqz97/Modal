@@ -1,0 +1,38 @@
+.genral-radio-button{
+    display: inline-block;
+    margin-right: 10px;
+}
+label{
+    color: #1e5c8b;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: default;
+    line-height: 0.6;
+}
+.genral-input-field{
+    border: 1px solid #e6e6e6;
+    width: 100%;
+    font-weight: 500;
+    flex: 1;
+    padding: 0.4em;
+    font-size: 12px;
+}
+select{
+    padding: 0;
+    color: #1e5c8b;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    display: inline-block;
+}
+.backdrop {
+    position: fixed;
+    top:0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.75);
+}

@@ -1,0 +1,64 @@
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  test
+</button> -->
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+  <div class="backdrop" (click)="onClose()"></div>
+  <div class="modal" tabindex="-1" role="dialog" style="display: block;">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{modalFields.title.label}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div *ngFor="let item of modalFields.fields" class="{{item.class}}">
+              <div [ngSwitch]="item.type">
+                <div *ngSwitchCase="1">
+                  <div class="form-group">
+                    <label for="">{{item.label}}</label>
+                    <input type="text" class="form-control genral-input-field" id="" aria-describedby="emailHelp" placeholder="">
+                  </div>
+                </div>
+                <div *ngSwitchCase="2"> 
+                  <label for="">{{item.label}}</label>
+                  <div class="form-check form-check-inline">
+                    <div *ngFor="let options of item.options" class="genral-radio-button">
+                      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="radio.value">
+                      <label class="form-check-label" for="exampleRadios1">
+                        {{options.label}}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div *ngSwitchCase="3">
+                  <div class="dropdown">
+                    <!-- <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{item.label}} -->
+                    <label class="caret"> {{item.label}}</label><br>
+                    <select (change)="selectChangeHandler($event)">
+                      <option *ngFor="let data of item.dataSource">{{data.label}}</option>
+                  </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onClose()">Close</button>
+    </div>
+    </div>
+  </div>
+</div>
