@@ -36,3 +36,54 @@ select{
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.75);
 }
+.modal-header{
+    color: #1e5c8b;
+    padding: 0.5em;
+    cursor: default;
+    background: #e8eef3;
+    border-bottom-color: #d6e1ea;
+}
+.modal-title{
+    margin: 0;
+    line-height: 1.42857143;
+    font-weight: 600;
+    color: #1e5c8b;
+    font-size: 12px;
+}
+.close{
+    top: auto;
+    right: 0;
+    margin-right: 1em;
+}
+.cancel-button{
+    background-color: #fbfbfb;
+    border: 1px solid #e6e6e6;
+    color: #757575;
+    cursor: pointer;
+    display: inline-block;
+    outline: 0 none !important;
+    text-align: center;
+    transition: all 0.2s ease-in-out 0s;
+    white-space: nowrap;
+    padding: 0.4em 0.5em;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 2px;
+}
+.modal-footer{
+    padding: 4px;
+}
+textarea{
+    font-size : 12px;
+}
+.general-star-required{
+    color: #ba0808;
+    display: inline-block;
+    font-size: 16px;
+    position: relative;
+    vertical-align: top;
+}
+.genral-error-msg{
+    color: #ba0808;
+    font-size: 12px;
+}

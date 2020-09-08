@@ -10,27 +10,37 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">{{modalFields.title.label}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title" id="exampleModalLabel">{{modalFields.title.label }}</h5>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
-        </button>
+        </button> -->
       </div>
       <div class="modal-body">
         <div class="container-fluid">
+          <form [formGroup]="ngForm">
           <div class="row">
-            <div *ngFor="let item of modalFields.fields" class="{{item.class}}">
-              <div [ngSwitch]="item.type">
+            <div *ngFor="let item of modalFields.fields | orderBy: 'order'" class="{{item.class}}">
+              <div [ngSwitch]="item.type" *ngIf="item.visability">
                 <div *ngSwitchCase="1">
                   <div class="form-group">
-                    <label for="">{{item.label}}</label>
-                    <input type="text" class="form-control genral-input-field" id="" aria-describedby="emailHelp" placeholder="">
+                    <label for="">{{item.label}}<span *ngIf="item.required" class="general-star-required">*</span></label>
+                    <input type="text" class="form-control genral-input-field" formControlName="{{item.key}}" id="" aria-describedby="emailHelp" placeholder="">
+                    <div *ngIf="ngForm.controls[item.key].invalid && (ngForm.controls[item.key].dirty || ngForm.controls[item.key].touched)">
+                      <div *ngIf="ngForm.controls[item.key].errors.required" class="genral-error-msg">
+                        {{item.label}} is required.
+                      </div>
+                      <div *ngIf="ngForm.controls[item.key].errors.pattern" class="genral-error-msg">
+                        {{item.label}} not valid.
+                      </div> 
                   </div>
+                  </div>
+                  
                 </div>
                 <div *ngSwitchCase="2"> 
-                  <label for="">{{item.label}}</label>
+                  <label for="">{{item.label}}<span *ngIf="item.required" class="general-star-required">*</span></label>
                   <div class="form-check form-check-inline">
                     <div *ngFor="let options of item.options" class="genral-radio-button">
-                      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="radio.value">
+                      <input class="form-check-input" type="radio"  name="{{item.key}}" value="{{options.key}}" id="{{options.key}}" [checked]="options.check == true">
                       <label class="form-check-label" for="exampleRadios1">
                         {{options.label}}
                       </label>
@@ -40,15 +50,28 @@
                 <div *ngSwitchCase="3">
                   <div class="dropdown">
                     <!-- <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{item.label}} -->
-                    <label class="caret"> {{item.label}}</label><br>
-                    <select (change)="selectChangeHandler($event)">
+                    <label class="caret"> {{item.label}}<span *ngIf="item.required" class="general-star-required">*</span></label><br>
+                    <select (change)="selectChangeHandler($event)" formControlName="{{item.key}}">
                       <option *ngFor="let data of item.dataSource">{{data.label}}</option>
                   </select>
                   </div>
                 </div>
+                <div *ngSwitchCase="4">
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea1">{{item.label}}<span *ngIf="item.required" class="general-star-required">*</span></label>
+                    <textarea class="form-control" formControlName="{{item.key}}" id="exampleFormControlTextarea1" rows="{{item.rows}}"></textarea>
+                    <div *ngIf="ngForm.controls[item.key].invalid && (ngForm.controls[item.key].dirty || ngForm.controls[item.key].touched)">
+                      <div *ngIf="ngForm.controls[item.key].errors.required" class="genral-error-msg">
+                        {{item.label}} is required.
+                      </div>
+                  </div>
+                  </div>
+                  
+                </div>
               </div>
             </div>
           </div>
+        </form>
         </div>
 
       </div>
@@ -57,7 +80,8 @@
         <button type="button" class="btn btn-primary">Save changes</button>
       </div> -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onClose()">Close</button>
+        <button type="button" class="btn btn-secondary cancel-button" data-dismiss="modal" (click)="onClose()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onClose()">Save</button>
     </div>
     </div>
   </div>
