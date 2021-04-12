@@ -1,0 +1,62 @@
+<div class="container">
+<form [formGroup]="ngForm">
+  <div class="row">
+    <div *ngFor="let item of modalFields.fields | valueArray | orderBy: 'order'" class="{{item.class}}">
+      <div [ngSwitch]="item.type" *ngIf="item.visability">
+        <div *ngSwitchCase="1">
+          <div class="form-group">
+            <label for="">{{item.label}}<span *ngIf="item.required" class="general-star-required">*</span></label>
+            <input type="text" class="form-control genral-input-field" formControlName="{{item.key}}" [(ngModel)]="item.value" [readonly]="item.disable" id="" aria-describedby="emailHelp" placeholder="">
+            <div *ngIf="ngForm.controls[item.key].invalid && (ngForm.controls[item.key].dirty || ngForm.controls[item.key].touched)">
+              <div *ngIf="ngForm.controls[item.key].errors.required" class="genral-error-msg">
+                {{item.label}} is required.
+              </div>
+              <div *ngIf="ngForm.controls[item.key].errors.pattern" class="genral-error-msg">
+                {{item.label}} not valid.
+              </div> 
+          </div>
+          </div>
+          
+        </div>
+        <div *ngSwitchCase="2"> 
+          <label for="">{{item.label}}<span *ngIf="item.required" class="general-star-required">*</span></label>
+          <div class="form-check form-check-inline">
+            <div *ngFor="let options of item.options" class="genral-radio-button">
+              <input class="form-check-input" type="radio"  name="{{item.key}}" value="{{options.key}}" id="{{options.key}}" [checked]="options.check == true">
+              <label class="form-check-label" for="exampleRadios1">
+                {{options.label}}
+              </label>
+            </div>
+          </div>
+        </div>
+        <div *ngSwitchCase="3">
+          <div class="dropdown">
+            <!-- <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{item.label}} -->
+            <label class="caret"> {{item.label}}<span *ngIf="item.required" class="general-star-required">*</span></label><br>
+            <select (change)="selectChangeHandler($event)" formControlName="{{item.key}}">
+              <option *ngFor="let data of item.dataSource">{{data.label}}</option>
+          </select>
+          </div>
+        </div>
+        <div *ngSwitchCase="4">
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">{{item.label}}<span *ngIf="item.required" class="general-star-required">*</span></label>
+            <textarea class="form-control" formControlName="{{item.key}}" id="exampleFormControlTextarea1" rows="{{item.rows}}"></textarea>
+            <div *ngIf="ngForm.controls[item.key].invalid && (ngForm.controls[item.key].dirty || ngForm.controls[item.key].touched)">
+              <div *ngIf="ngForm.controls[item.key].errors.required" class="genral-error-msg">
+                {{item.label}} is required.
+              </div>
+          </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <button type="button" class="btn btn-primary" (click)="submitForm()">
+      save
+    </button>
+  </div>
+</form>
+</div>

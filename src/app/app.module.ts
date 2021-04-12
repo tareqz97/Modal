@@ -7,12 +7,16 @@ import { TestModalComponent } from './test-modal/test-modal.component';
 import { PlaceholderDirective } from './placeholder.directive';
 import { OrderModule } from 'ngx-order-pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormImpComponent } from './form-imp/form-imp.component';
+import { ValueArrayPipe } from './value-array.pipe';
 @NgModule({
   declarations: [
     AppComponent,
     ModalImplComponent,
     TestModalComponent,
-    PlaceholderDirective
+    PlaceholderDirective,
+    FormImpComponent,
+    ValueArrayPipe
   ],
   imports: [
     BrowserModule,
